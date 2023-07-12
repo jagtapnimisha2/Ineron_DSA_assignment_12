@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- Question1 :- Given a singly linked list, delete middle of the linked list. For example, if given linked list is 1->2->3->4->5 then linked list should be modified to 1->2->4->5.If there are even nodes, then there would be two middle nodes, we need to delete the second middle element. For example, if given linked list is 1->2->3->4->5->6 then it should be modified to 1->2->3->5->6.If the input linked list is NULL or has 1 node, then it should return NULL-->
+    <script>
+        class Node {
+  constructor(value) {
+    this.value = value;
+    this.next = null;
+  }
+}
+
+function deleteMiddleNode(head) {
+  if (head === null || head.next === null) {
+    return null;
+  }
+
+  let slow = head;
+  let fast = head;
+  let prev = null;
+  while (fast !== null && fast.next !== null) {
+    fast = fast.next.next;
+    prev = slow;
+    slow = slow.next;
+  }
+  prev.next = slow.next;
+  slow = null;
+}
+
+// Example usage:
+const head1 = new Node(2);
+const node2 = new Node(4);
+const node3 = new Node(6);
+const node4 = new Node(7);
+const node5 = new Node(5);
+const node6 = new Node(1);
+
+head1.next = node2;
+node2.next = node3;
+node3.next = node4;
+node4.next = node5;
+node5.next = node6;
+
+deleteMiddleNode(head1);
+let current = head1;
+while (current !== null) {
+  console.log(current.value);
+  current = current.next;
+}
+
+
+
+    </script>
+</body>
+</html>

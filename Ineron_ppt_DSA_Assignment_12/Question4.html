@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        class Node {
+  constructor(data) {
+    this.data = data;
+    this.next = null;
+  }
+}
+
+class LinkedList {
+  constructor() {
+    this.head = null;
+  }
+
+  addNode(data) {
+    const newNode = new Node(data);
+
+    if (this.head === null) {
+      this.head = newNode;
+    } else {
+      let current = this.head;
+      while (current.next !== null) {
+        current = current.next;
+      }
+      current.next = newNode;
+    }
+  }
+
+  isPalindrome() {
+    if (this.head === null) {
+      return false;
+    }
+
+    let currentNode = this.head;
+    const charArray = [];
+    while (currentNode !== null) {
+      charArray.push(currentNode.data);
+      currentNode = currentNode.next;
+    }
+
+    let left = 0;
+    let right = charArray.length - 1;
+    while (left < right) {
+      if (charArray[left] !== charArray[right]) {
+        return false;
+      }
+      left++;
+      right--;
+    }
+
+    return true;
+  }
+}
+const linkedList = new LinkedList();
+linkedList.addNode('R');
+linkedList.addNode('A');
+linkedList.addNode('D');
+linkedList.addNode('A');
+linkedList.addNode('R');
+
+document.write(linkedList.isPalindrome());
+
+linkedList.addNode('C');
+linkedList.addNode('O');
+linkedList.addNode('D');
+linkedList.addNode('E');
+document.write(" "+linkedList.isPalindrome()); 
+
+    </script>
+</body>
+</html>

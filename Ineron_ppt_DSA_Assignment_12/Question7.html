@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- Question8:-
+
+Given two linked lists, insert nodes of second list into first list at alternate positions of first list.
+For example, if first list is 5->7->17->13->11 and second is 12->10->2->4->6, the first list should become 5->12->7->10->17->2->13->4->11->6 and second list should become empty. The nodes of second list should only be inserted when there are positions available. For example, if the first list is 1->2->3 and second list is 4->5->6->7->8, then first list should become 1->4->2->5->3->6 and second list to 7->8.
+
+Use of extra space is not allowed (Not allowed to create additional nodes), i.e., insertion must be done in-place. Expected time complexity is O(n) where n is number of nodes in first list.
+ -->
+    <script>
+        class Node {
+  constructor(value) {
+    this.value = value;
+    this.next = null;
+  }
+}
+
+function mergeAlternatePositions(firstHead, secondHead) {
+  let firstCurrent = firstHead;
+  let secondCurrent = secondHead;
+
+  while (firstCurrent !== null && secondCurrent !== null) {
+    let firstNext = firstCurrent.next;
+    let secondNext = secondCurrent.next;
+    firstCurrent.next = secondCurrent;
+    secondCurrent.next = firstNext;
+    firstCurrent = firstNext;
+    secondCurrent = secondNext;
+  }
+  if (secondCurrent !== null) {
+    firstCurrent.next = secondCurrent;
+  }
+  secondHead = null;
+}
+const firstHead = new Node(5);
+const firstNode2 = new Node(7);
+const firstNode3 = new Node(17);
+const firstNode4 = new Node(13);
+const firstNode5 = new Node(11);
+
+firstHead.next = firstNode2;
+firstNode2.next = firstNode3;
+firstNode3.next = firstNode4;
+firstNode4.next = firstNode5;
+
+const secondHead = new Node(12);
+const secondNode2 = new Node(10);
+const secondNode3 = new Node(2);
+const secondNode4 = new Node(4);
+const secondNode5 = new Node(6);
+
+secondHead.next = secondNode2;
+secondNode2.next = secondNode3;
+secondNode3.next = secondNode4;
+secondNode4.next = secondNode5;
+
+mergeAlternatePositions(firstHead, secondHead);
+let current = firstHead;
+while (current !== null) {
+  console.log(current.value);
+  current = current.next;
+}
+current = secondHead;
+while (current !== null) {
+  console.log(current.value);
+  current = current.next;
+}
+
+    </script>
+</body>
+</html>
